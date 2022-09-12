@@ -1,25 +1,31 @@
 package np.com.roshanadhikary.vpps.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 
 @Data
 @Entity
 @Table(name="batteries")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Battery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private int id;
 
     @Column
     private String name;
 
-    @Column
+    @Column(unique = true)
     private int postcode;
 
     @Column
     private int capacity;
+
 }
