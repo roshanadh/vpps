@@ -26,12 +26,10 @@ public class BatteryController {
         return service.findAll();
     }
 
-
     @GetMapping("/batteries/postcode")
-    public BatteryListEntity getBatteriesFromPostcodeRange(@RequestParam int start, @RequestParam int end) {
-        return service.findAllWithinPostcodeRange(start, end);
+    public BatteryListEntity getBatteriesBetweenPostcodeRange(@RequestParam int start, @RequestParam int end) {
+        return service.findAllBetweenPostcodeRange(start, end);
     }
-
 
     @PostMapping("/batteries/")
     public List<Battery> saveBatteries(@RequestBody List<Battery> batteries) {

@@ -38,7 +38,7 @@ public class BatteryService {
                 .collect(Collectors.toList());
     }
 
-    public BatteryListEntity findAllWithinPostcodeRange(int start, int end) {
+    public BatteryListEntity findAllBetweenPostcodeRange(int start, int end) {
         List<Battery> batteries = repository
                 .findBatteriesBetweenPostcodeRange(start, end, Sort.by("name"));
 
