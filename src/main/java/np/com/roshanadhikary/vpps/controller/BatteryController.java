@@ -2,6 +2,7 @@ package np.com.roshanadhikary.vpps.controller;
 
 import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.repository.BatteryRepository;
+import np.com.roshanadhikary.vpps.service.BatteryService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -15,56 +16,31 @@ import java.util.stream.StreamSupport;
 @RestController
 public class BatteryController {
 
-    private final BatteryRepository repository;
+    private final BatteryService service;
 
-    public BatteryController(BatteryRepository repository) {
-        this.repository = repository;
+    public BatteryController(BatteryService service) {
+        this.service = service;
     }
 
     @GetMapping("/batteries/{id}")
     public Battery getBatteryFromId(@PathVariable int id) {
-        return repository
-                .findById(id)
-                .orElseThrow(
-                        () -> new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                new String().format("Battery with ID %s does not exist", id)
-                        ));
+        return service.findById(id);
     }
 
     @GetMapping("/batteries/")
     public List<Battery> getAllBatteries() {
-        return StreamSupport
-                .stream(repository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+        return service.findAll();
     }
 
 
     @GetMapping("/batteries/postcode")
     public List<Battery> getBatteriesFromPostcodeRange(@RequestParam int start, @RequestParam int end) {
-        List<Battery> batteriesList = repository
-                .findBatteriesBetweenPostcodeRange(start, end, Sort.by("name"));
-
-        if (batteriesList.isEmpty())
-            throw new ResponseStatusException(
-                    HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE,
-                    new String().format("Batteries with postcode in range [%s, %s] do not exist", start, end));
-
-        return batteriesList;
+        return service.findAllWithinPostcodeRange(start, end);
     }
 
 
     @PostMapping("/batteries/")
     public List<Battery> saveBatteries(@RequestBody List<Battery> batteries) {
-        try {
-            return StreamSupport
-                    .stream(repository.saveAll(batteries).spliterator(), false)
-                    .collect(Collectors.toList());
-        } catch (DataIntegrityViolationException dive) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "Battery with postcode already exists");
-        }
-
+        return service.saveAll(batteries);
     }
 }
