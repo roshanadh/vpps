@@ -1,6 +1,7 @@
 package np.com.roshanadhikary.vpps.service;
 
 import np.com.roshanadhikary.vpps.entity.Battery;
+import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.repository.BatteryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
@@ -37,16 +38,33 @@ public class BatteryService {
                 .collect(Collectors.toList());
     }
 
-    public List<Battery> findAllWithinPostcodeRange(int start, int end) {
-        List<Battery> batteriesList = repository
+    public BatteryListEntity findAllWithinPostcodeRange(int start, int end) {
+        List<Battery> batteries = repository
                 .findBatteriesBetweenPostcodeRange(start, end, Sort.by("name"));
 
-        if (batteriesList.isEmpty())
+        if (batteries.isEmpty())
             throw new ResponseStatusException(
                     HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE,
                     new String().format("Batteries with postcode in range [%s, %s] do not exist", start, end));
 
-        return batteriesList;
+        long totalCapacity = batteries
+                .stream()
+                .mapToLong(b -> b.getCapacity())
+                .sum();
+
+        double avgCapacity = batteries
+                .stream()
+                .mapToDouble(b -> b.getCapacity())
+                .average()
+                .orElse(0D);
+
+        BatteryListEntity responseEntity = new BatteryListEntity();
+
+        responseEntity.setBatteries(batteries);
+        responseEntity.setTotalCapacity(totalCapacity);
+        responseEntity.setAvgCapacity(avgCapacity);
+
+        return responseEntity;
     }
 
     public List<Battery> saveAll(List<Battery> batteries) {
