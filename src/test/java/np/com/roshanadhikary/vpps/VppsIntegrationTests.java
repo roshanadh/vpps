@@ -81,7 +81,7 @@ class VppsIntegrationTests {
                 .collect(Collectors.toList());
 
         mockMvc
-                .perform(get(new String().format("/batteries/postcode?start=%s&end=%s", start, end)))
+                .perform(get(String.format("/batteries/postcode?start=%s&end=%s", start, end)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalCapacity").isNumber())
@@ -145,7 +145,7 @@ class VppsIntegrationTests {
         String end = "#123";
 
         mockMvc
-                .perform(get(new String().format("/batteries/postcode?start=%s&end=%s", start, end)))
+                .perform(get(String.format("/batteries/postcode?start=%s&end=%s", start, end)))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }

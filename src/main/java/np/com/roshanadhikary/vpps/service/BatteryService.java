@@ -3,7 +3,6 @@ package np.com.roshanadhikary.vpps.service;
 import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.repository.BatteryRepository;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,7 +26,7 @@ public class BatteryService {
                 .orElseThrow(
                         () -> new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                new String().format("Battery with ID %s does not exist", id)
+                                String.format("Battery with ID %s does not exist", id)
                         ));
     }
 
@@ -46,32 +45,32 @@ public class BatteryService {
         } catch (NumberFormatException nfe) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    new String().format("Postcode range should be numeric", start, end));
+                    "Postcode range should be numeric");
         }
 
 
         if (batteries.isEmpty())
             throw new ResponseStatusException(
                     HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE,
-                    new String().format("Batteries with postcode in range [%s, %s] do not exist", start, end));
+                    String.format("Batteries with postcode in range [%s, %s] do not exist", start, end));
 
         long totalCapacity = batteries
                 .stream()
-                .mapToLong(b -> b.getCapacity())
+                .mapToLong(Battery::getCapacity)
                 .sum();
 
         double avgCapacity = batteries
                 .stream()
-                .mapToDouble(b -> b.getCapacity())
+                .mapToDouble(Battery::getCapacity)
                 .average()
                 .orElse(0D);
 
         List<String> batteryNames = batteries
                 .stream()
-                .map(b -> b.getName())
+                .map(Battery::getName)
                 .collect(Collectors.toList());
 
-        BatteryListEntity responseEntity = new BatteryListEntity();
+        var responseEntity = new BatteryListEntity();
 
         responseEntity.setBatteries(batteryNames);
         responseEntity.setTotalCapacity(totalCapacity);
