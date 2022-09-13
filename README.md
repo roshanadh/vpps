@@ -12,6 +12,8 @@
 * MockMvc - *for writing integration tests*
 * AssertJ
 * GitHub Actions
+* SonarQube
+* JaCoCo
 
 ## Setup Project
 1. Clone the repository
@@ -67,7 +69,7 @@ The `id` attribute contains an integer ID auto-generated when a battery resource
 
 The `name` attribute contains the name of the battery resource.
 
-The `postcode` attribute contains the postcode information of a battery resource. The postcode field in the database is a unique field, so there cannot be two batteries with the same postcode.
+The `postcode` attribute contains the postcode information of a battery resource.
 
 The `capacity` attribute contains the watt-capacity information of a battery resource.
 
@@ -98,7 +100,7 @@ The `id` attribute contains an integer ID auto-generated when a battery resource
 
 The `name` attribute contains the name of the battery resource.
 
-The `postcode` attribute contains the postcode information of a battery resource. The postcode field in the database is a unique field, so there cannot be two batteries with the same postcode.
+The `postcode` attribute contains the postcode information of a battery resource.
 
 The `capacity` attribute contains the watt-capacity information of a battery resource.
 
@@ -178,7 +180,7 @@ The `id` attribute contains an integer ID auto-generated when a battery resource
 
 The `name` attribute contains the name of the battery resource.
 
-The `postcode` attribute contains the postcode information of a battery resource. The postcode field in the database is a unique field, so there cannot be two batteries with the same postcode.
+The `postcode` attribute contains the postcode information of a battery resource.
 
 The `capacity` attribute contains the watt-capacity information of a battery resource.
 
