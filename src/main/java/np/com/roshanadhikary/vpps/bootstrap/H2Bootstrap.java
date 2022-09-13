@@ -20,22 +20,19 @@ public class H2Bootstrap {
 
     private static final Logger logger = LoggerFactory.getLogger(H2Bootstrap.class);
 
+    public static List<Battery> mockBatteries = new ArrayList<>() {
+        {
+            add(new Battery(11, "Battery1", String.valueOf(1010), 20500));
+            add(new Battery(11, "Battery2", String.valueOf(1020), 20000));
+            add(new Battery(11, "Battery3", String.valueOf(1040), 30000));
+            add(new Battery(11, "Battery4", String.valueOf(1060), 30500));
+
+        }
+    };
     @Bean
     CommandLineRunner initDb(BatteryRepository repository) {
-        List<Battery> initList = new ArrayList<>() {
-            {
-                add(new Battery(11, "Battery1", 1010, 20500));
-                add(new Battery(11, "Battery2", 1020, 20000));
-                add(new Battery(11, "Battery3", 1040, 30000));
-                add(new Battery(11, "Battery4", 1060, 30500));
-
-            }
-        };
-
-        return args -> {
-            initList.forEach(battery ->
-                logger.info("Preloading " + repository.save(battery))
-            );
-        };
+        return args -> mockBatteries.forEach(battery ->
+            logger.info("Preloading " + repository.save(battery))
+        );
     }
 }

@@ -3,6 +3,7 @@ package np.com.roshanadhikary.vpps.controller;
 import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.service.BatteryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +27,13 @@ public class BatteryController {
         return service.findAll();
     }
 
-
     @GetMapping("/batteries/postcode")
-    public BatteryListEntity getBatteriesFromPostcodeRange(@RequestParam int start, @RequestParam int end) {
-        return service.findAllWithinPostcodeRange(start, end);
+    public BatteryListEntity getBatteriesBetweenPostcodeRange(@RequestParam String start, @RequestParam String end) {
+        return service.findAllBetweenPostcodeRange(start, end);
     }
 
-
     @PostMapping("/batteries/")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Battery> saveBatteries(@RequestBody List<Battery> batteries) {
         return service.saveAll(batteries);
     }

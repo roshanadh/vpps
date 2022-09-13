@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Database entity where name, postcode, and capacity are user-supplied fields
+ */
 
 @Data
 @Entity
@@ -23,7 +26,7 @@ public class Battery {
     private String name;
 
     @Column(unique = true)
-    private int postcode;
+    private String postcode;
 
     @Column
     private int capacity;

@@ -4,7 +4,6 @@ import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.repository.BatteryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,9 +37,18 @@ public class BatteryService {
                 .collect(Collectors.toList());
     }
 
-    public BatteryListEntity findAllWithinPostcodeRange(int start, int end) {
-        List<Battery> batteries = repository
-                .findBatteriesBetweenPostcodeRange(start, end, Sort.by("name"));
+    public BatteryListEntity findAllBetweenPostcodeRange(String start, String end) {
+        List<Battery> batteries;
+
+        try {
+            batteries = repository
+                    .findBatteriesBetweenPostcodeRange(Integer.parseInt(start), Integer.parseInt(end));
+        } catch (NumberFormatException nfe) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    new String().format("Postcode range should be numeric", start, end));
+        }
+
 
         if (batteries.isEmpty())
             throw new ResponseStatusException(
@@ -58,9 +66,14 @@ public class BatteryService {
                 .average()
                 .orElse(0D);
 
+        List<String> batteryNames = batteries
+                .stream()
+                .map(b -> b.getName())
+                .collect(Collectors.toList());
+
         BatteryListEntity responseEntity = new BatteryListEntity();
 
-        responseEntity.setBatteries(batteries);
+        responseEntity.setBatteries(batteryNames);
         responseEntity.setTotalCapacity(totalCapacity);
         responseEntity.setAvgCapacity(avgCapacity);
 
