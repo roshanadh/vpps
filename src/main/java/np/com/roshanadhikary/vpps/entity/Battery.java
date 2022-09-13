@@ -23,7 +23,7 @@ public class Battery {
     private String name;
 
     @Column(unique = true)
-    private int postcode;
+    private String postcode;
 
     @Column
     private int capacity;

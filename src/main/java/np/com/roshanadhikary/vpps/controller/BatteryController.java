@@ -27,7 +27,7 @@ public class BatteryController {
     }
 
     @GetMapping("/batteries/postcode")
-    public BatteryListEntity getBatteriesBetweenPostcodeRange(@RequestParam int start, @RequestParam int end) {
+    public BatteryListEntity getBatteriesBetweenPostcodeRange(@RequestParam String start, @RequestParam String end) {
         return service.findAllBetweenPostcodeRange(start, end);
     }
 
