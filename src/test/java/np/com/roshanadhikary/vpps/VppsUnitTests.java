@@ -25,8 +25,8 @@ class VppsUnitTests {
 	private BatteryRepository repository;
 
 	private static final List<Battery> mockBatteries = List.of(
-			new Battery(1, "Duracell", String.valueOf(1220), 25000),
-			new Battery(2, "Eveready", String.valueOf(1240), 30000)
+			new Battery("Battery Loc 1", String.valueOf(1220), 25000),
+			new Battery("Battery Loc 2", String.valueOf(1240), 30000)
 	);
 
 	@Test

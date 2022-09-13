@@ -22,11 +22,11 @@ public class VppsRepositoryTests {
     private BatteryRepository repository;
 
     public static final List<Battery> mockBatteries = List.of(
-            new Battery(1, "Duracell", String.valueOf(1220), 25000),
-            new Battery(2, "Eveready", String.valueOf(1240), 30000),
-            new Battery(3, "RabbitCell", String.valueOf(1250), 31000),
-            new Battery(4, "AllStarCell", String.valueOf(1270), 28000),
-            new Battery(5, "TrustedBattery", String.valueOf(1290), 30000)
+            new Battery("Battery Loc 1", String.valueOf(1220), 25000),
+            new Battery("Battery Loc 2", String.valueOf(1240), 30000),
+            new Battery("Battery Loc 3", String.valueOf(1250), 31000),
+            new Battery("Battery Loc 4", String.valueOf(1270), 28000),
+            new Battery("Battery Loc 5", String.valueOf(1290), 30000)
     );
 
     @BeforeAll

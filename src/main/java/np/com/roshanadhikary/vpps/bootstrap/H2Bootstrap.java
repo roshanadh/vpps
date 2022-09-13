@@ -22,10 +22,10 @@ public class H2Bootstrap {
 
     public static List<Battery> mockBatteries = new ArrayList<>() {
         {
-            add(new Battery(11, "Battery1", String.valueOf(1010), 20500));
-            add(new Battery(11, "Battery2", String.valueOf(1020), 20000));
-            add(new Battery(11, "Battery3", String.valueOf(1040), 30000));
-            add(new Battery(11, "Battery4", String.valueOf(1060), 30500));
+            add(new Battery("Battery Loc 1", String.valueOf(1010), 20500));
+            add(new Battery("Battery Loc 2", String.valueOf(1020), 20000));
+            add(new Battery("Battery Loc 3", String.valueOf(1040), 30000));
+            add(new Battery("Battery Loc 4", String.valueOf(1060), 30500));
 
         }
     };
