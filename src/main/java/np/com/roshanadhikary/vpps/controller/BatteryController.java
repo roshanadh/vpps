@@ -3,6 +3,7 @@ package np.com.roshanadhikary.vpps.controller;
 import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.service.BatteryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class BatteryController {
     }
 
     @PostMapping("/batteries/")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Battery> saveBatteries(@RequestBody List<Battery> batteries) {
         return service.saveAll(batteries);
     }

@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Database entity where name, postcode, and capacity are user-supplied fields
+ */
 
 @Data
 @Entity

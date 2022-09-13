@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-class VppsMockTests {
+class VppsUnitTests {
 
 	@Autowired
 	private BatteryService service;
@@ -30,7 +30,7 @@ class VppsMockTests {
 	);
 
 	@Test
-	public void getBatteriesTest() {
+	public void shouldFetchAllBatteries() {
 		when(repository.findAll())
 				.thenReturn(mockBatteries);
 
@@ -40,7 +40,7 @@ class VppsMockTests {
 	}
 
 	@Test
-	public void getBatteriesBetweenPostcodeRangeTest() {
+	public void shouldFetchBatteriesWithinRange() {
 		String start = "1200";
 		String end = "1280";
 
@@ -71,7 +71,7 @@ class VppsMockTests {
 	}
 
 	@Test
-	public void saveBatteriesTest() {
+	public void shouldPersistAllBatteries() {
 		when(repository.saveAll(mockBatteries)).thenReturn(mockBatteries);
 
 		Assertions.assertEquals(mockBatteries, service.saveAll(mockBatteries));

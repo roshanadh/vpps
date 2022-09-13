@@ -21,7 +21,7 @@ public class VppsRepositoryTests {
     @Autowired
     private BatteryRepository repository;
 
-    private static final List<Battery> mockBatteries = List.of(
+    public static final List<Battery> mockBatteries = List.of(
             new Battery(1, "Duracell", String.valueOf(1220), 25000),
             new Battery(2, "Eveready", String.valueOf(1240), 30000),
             new Battery(3, "RabbitCell", String.valueOf(1250), 31000),
@@ -38,7 +38,7 @@ public class VppsRepositoryTests {
      * batteries returned should be within the given postcode range
      */
     @Test
-    public void getBatteriesBetweenPostcodeRangeTest() {
+    public void shouldFetchOnlyBatteriesWithinRange() {
         String start = "1230";
         String end = "1280";
 
