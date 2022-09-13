@@ -8,5 +8,5 @@ import java.util.List;
 public class BatteryListEntity {
     private long totalCapacity;
     private double avgCapacity;
-    private List<Battery> batteries;
+    private List<String> batteries;
 }
