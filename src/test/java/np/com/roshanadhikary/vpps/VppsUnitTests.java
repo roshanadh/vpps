@@ -1,7 +1,5 @@
 package np.com.roshanadhikary.vpps;
 
-import static org.mockito.Mockito.when;
-
 import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.repository.BatteryRepository;
@@ -11,9 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class VppsUnitTests {
@@ -68,6 +70,18 @@ class VppsUnitTests {
 						.map(b -> b.getName())
 						.collect(Collectors.toList()),
 				responseEntity.getBatteries());
+	}
+
+	@Test
+	public void shouldThrowExceptionForNoBatteriesWithinRange() {
+		String start = "0001";
+		String end = "0010";
+
+		when(repository.findBatteriesBetweenPostcodeRange(Integer.parseInt(start), Integer.parseInt(end)))
+				.thenReturn(new ArrayList<>());
+
+		Exception rse = Assertions
+				.assertThrows(ResponseStatusException.class, () -> service.findAllBetweenPostcodeRange(start, end));
 	}
 
 	@Test
