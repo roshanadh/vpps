@@ -15,6 +15,9 @@
 	<description>REST API for a Virtual Power Plant System</description>
 	<properties>
 		<java.version>11</java.version>
+		<!-- for sonarcloud GitHub integration -->
+		<sonar.organization>roshanadh</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
