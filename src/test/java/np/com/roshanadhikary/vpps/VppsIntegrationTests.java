@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,7 +93,28 @@ class VppsIntegrationTests {
 
     @Test
     public void shouldPersistAllBatteries() throws Exception {
-        List<Battery> mockBatteries = VppsRepositoryTests.mockBatteries;
+        List<Battery> mockBatteries = new ArrayList<>() {{
+            add(new Battery("Cannington", "6107", 13500));
+            add(new Battery("Midland", "6057", 50500));
+            add(new Battery("Hay Street", "6000", 23500));
+            add(new Battery("Mount Adams", "6525", 12000));
+            add(new Battery("Koolan Island", "6733", 10000));
+            add(new Battery("Armadale", "6992", 25000));
+            add(new Battery("Lesmurdie", "6076", 13500));
+            add(new Battery("Kalamunda", "6076", 13500));
+            add(new Battery("Carmel", "6076", 36000));
+            add(new Battery("Bentley", "6102", 85000));
+            add(new Battery("Akunda Bay", "2084", 13500));
+            add(new Battery("Werrington County", "2747", 13500));
+            add(new Battery("Bagot", "0820", 27000));
+            add(new Battery("Yirrkala", "0880", 13500));
+            add(new Battery("University of Melbourne", "3010", 85000));
+            add(new Battery("Norfolk Island", "2899", 13500));
+            add(new Battery("Ootha", "2875", 13500));
+            add(new Battery("Kent Town", "5067", 13500));
+            add(new Battery("Northgate Mc", "9464", 13500));
+            add(new Battery("Gold Coast Mc", "9729", 50000));
+        }};
 
         mockMvc
                 .perform(
@@ -115,20 +137,6 @@ class VppsIntegrationTests {
                 .perform(get("/batteries/" + id))
                 .andDo(print())
                 .andExpect(status().isNotFound());
-    }
-
-    @Test
-    public void shouldNotPersistBatteriesWithSamePostcode() throws Exception {
-        List<Battery> mockBatteries = H2Bootstrap.mockBatteries;
-
-        mockMvc
-                .perform(
-                        post("/batteries/")
-                                .content(objectMapper.writeValueAsString(mockBatteries))
-                                .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isConflict());
     }
 
     @Test
