@@ -1,6 +1,6 @@
 # Virtual Power Plant System - REST API
 ![VPPS](https://github.com/roshanadh/vpps/actions/workflows/maven.yml/badge.svg?branch=main)
-
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=np.com.roshanadhikary%3Avpps)
 ## Tools and Frameworks Used
 * Java 11
 * Spring Boot
