@@ -93,28 +93,28 @@ class VppsIntegrationTests {
 
     @Test
     void shouldPersistAllBatteries() throws Exception {
-        List<Battery> mockBatteries = new ArrayList<>() {{
-            add(new Battery("Cannington", "6107", 13500));
-            add(new Battery("Midland", "6057", 50500));
-            add(new Battery("Hay Street", "6000", 23500));
-            add(new Battery("Mount Adams", "6525", 12000));
-            add(new Battery("Koolan Island", "6733", 10000));
-            add(new Battery("Armadale", "6992", 25000));
-            add(new Battery("Lesmurdie", "6076", 13500));
-            add(new Battery("Kalamunda", "6076", 13500));
-            add(new Battery("Carmel", "6076", 36000));
-            add(new Battery("Bentley", "6102", 85000));
-            add(new Battery("Akunda Bay", "2084", 13500));
-            add(new Battery("Werrington County", "2747", 13500));
-            add(new Battery("Bagot", "0820", 27000));
-            add(new Battery("Yirrkala", "0880", 13500));
-            add(new Battery("University of Melbourne", "3010", 85000));
-            add(new Battery("Norfolk Island", "2899", 13500));
-            add(new Battery("Ootha", "2875", 13500));
-            add(new Battery("Kent Town", "5067", 13500));
-            add(new Battery("Northgate Mc", "9464", 13500));
-            add(new Battery("Gold Coast Mc", "9729", 50000));
-        }};
+        List<Battery> mockBatteries = List.of(
+            new Battery("Cannington", "6107", 13500),
+            new Battery("Midland", "6057", 50500),
+            new Battery("Hay Street", "6000", 23500),
+            new Battery("Mount Adams", "6525", 12000),
+            new Battery("Koolan Island", "6733", 10000),
+            new Battery("Armadale", "6992", 25000),
+            new Battery("Lesmurdie", "6076", 13500),
+            new Battery("Kalamunda", "6076", 13500),
+            new Battery("Carmel", "6076", 36000),
+            new Battery("Bentley", "6102", 85000),
+            new Battery("Akunda Bay", "2084", 13500),
+            new Battery("Werrington County", "2747", 13500),
+            new Battery("Bagot", "0820", 27000),
+            new Battery("Yirrkala", "0880", 13500),
+            new Battery("University of Melbourne", "3010", 85000),
+            new Battery("Norfolk Island", "2899", 13500),
+            new Battery("Ootha", "2875", 13500),
+            new Battery("Kent Town", "5067", 13500),
+            new Battery("Northgate Mc", "9464", 13500),
+            new Battery("Gold Coast Mc", "9729", 50000)
+        );
 
         mockMvc
                 .perform(
