@@ -28,7 +28,7 @@ This sets up the project to run on port 8080.
 
 ## API Reference
 
-### Index
+### 1. Index
 
 #### Request
 ```http
@@ -39,7 +39,7 @@ GET /
 
 The API returns a simple `Hello World!` message as a response.
 
-### Fetch a single battery resource
+### 2. Fetch a single battery resource
 
 #### Request
 ```http
@@ -71,7 +71,7 @@ The `postcode` attribute contains the postcode information of a battery resource
 
 The `capacity` attribute contains the watt-capacity information of a battery resource.
 
-### Fetch all battery resources
+### 3. Fetch all battery resources
 
 #### Request
 ```http
@@ -102,7 +102,7 @@ The `postcode` attribute contains the postcode information of a battery resource
 
 The `capacity` attribute contains the watt-capacity information of a battery resource.
 
-### Fetch all battery resources within a range of postcode
+### 4. Fetch all battery resources within a range of postcode
 
 To get a list of the names of batteries having postcode within the range provided in the request.
 #### Request
@@ -136,7 +136,7 @@ The `avgCapacity` attribute contains a double-valued average of the capacities o
 
 The `batteries` attribute contains the list of names of battery resources found in the given postcode range.
 
-### Persist a list of battery resources
+### 5. Persist a list of battery resources
 
 To persist a list of the battery resources in the in-memory H2 database.
 
