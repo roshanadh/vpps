@@ -4,7 +4,6 @@ import np.com.roshanadhikary.vpps.entity.Battery;
 import np.com.roshanadhikary.vpps.entity.BatteryListEntity;
 import np.com.roshanadhikary.vpps.repository.BatteryRepository;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
