@@ -1,8 +1,6 @@
 package np.com.roshanadhikary.vpps.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,8 +11,8 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="batteries")
+@RequiredArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
 public class Battery {
 
     @Id
@@ -23,12 +21,15 @@ public class Battery {
     private int id;
 
     @Column
+    @NonNull
     private String name;
 
-    @Column(unique = true)
+    @Column
+    @NonNull
     private String postcode;
 
     @Column
+    @NonNull
     private int capacity;
 
 }
