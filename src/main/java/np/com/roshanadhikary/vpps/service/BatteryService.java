@@ -81,14 +81,8 @@ public class BatteryService {
     }
 
     public List<Battery> saveAll(List<Battery> batteries) {
-        try {
-            return StreamSupport
-                    .stream(repository.saveAll(batteries).spliterator(), false)
-                    .collect(Collectors.toList());
-        } catch (DataIntegrityViolationException dive) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "Battery with postcode already exists");
-        }
+        return StreamSupport
+                .stream(repository.saveAll(batteries).spliterator(), false)
+                .collect(Collectors.toList());
     }
 }
