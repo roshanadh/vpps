@@ -194,5 +194,4 @@ The API can respond with the following status codes:
 | 201         | `CREATED`               | `List of batteries persisted successfully`             |
 | 400         | `BAD REQUEST`           | `Invalid range of postcode given in request`           |
 | 404         | `NOT FOUND`             | `No battery within given range of postcode`            |
-| 409         | `CONFLICT`              | `Attempted to persist battery with duplicate postcode` |
 | 500         | `INTERNAL SERVER ERROR` | `Error in API`                                         |
