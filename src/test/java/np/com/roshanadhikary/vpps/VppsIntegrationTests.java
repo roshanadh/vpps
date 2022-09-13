@@ -31,7 +31,7 @@ class VppsIntegrationTests {
     private ObjectMapper objectMapper;
 
     @Test
-    public void shouldReturnHelloMessage() throws Exception {
+    void shouldReturnHelloMessage() throws Exception {
         mockMvc
                 .perform(get("/"))
                 .andDo(print())
@@ -43,7 +43,7 @@ class VppsIntegrationTests {
     // order specified to prevent a later save operation from overriding DB and
     // causing the assertions of name, postcode, and capacity to not make sense
     @Order(1)
-    public void shouldFetchBatteryID1() throws Exception {
+    void shouldFetchBatteryID1() throws Exception {
         mockMvc
                 .perform(get("/batteries/1"))
                 .andDo(print())
@@ -56,7 +56,7 @@ class VppsIntegrationTests {
 
     @Test
     @Order(2)
-    public void shouldReturnAllBatteries() throws Exception {
+    void shouldReturnAllBatteries() throws Exception {
         mockMvc
                 .perform(get("/batteries/"))
                 .andDo(print())
@@ -69,7 +69,7 @@ class VppsIntegrationTests {
 
     @Test
     @Order(3)
-    public void shouldReturnBatteriesWithinRange() throws Exception {
+    void shouldReturnBatteriesWithinRange() throws Exception {
         String start = "0010";
         String end = "1070";
 
@@ -92,7 +92,7 @@ class VppsIntegrationTests {
     }
 
     @Test
-    public void shouldPersistAllBatteries() throws Exception {
+    void shouldPersistAllBatteries() throws Exception {
         List<Battery> mockBatteries = new ArrayList<>() {{
             add(new Battery("Cannington", "6107", 13500));
             add(new Battery("Midland", "6057", 50500));
@@ -131,7 +131,7 @@ class VppsIntegrationTests {
     // negative tests
 
     @Test
-    public void shouldReturn404ForNonExistentBatteryID() throws Exception {
+    void shouldReturn404ForNonExistentBatteryID() throws Exception {
         int id = 102;
         mockMvc
                 .perform(get("/batteries/" + id))
@@ -140,7 +140,7 @@ class VppsIntegrationTests {
     }
 
     @Test
-    public void shouldReturnBadRequestForInvalidRange() throws Exception {
+    void shouldReturnBadRequestForInvalidRange() throws Exception {
         String start = "abcd";
         String end = "#123";
 

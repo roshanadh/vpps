@@ -16,7 +16,7 @@ import java.util.List;
  */
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class VppsRepositoryTests {
+class VppsRepositoryTests {
 
     @Autowired
     private BatteryRepository repository;
@@ -30,7 +30,7 @@ public class VppsRepositoryTests {
     );
 
     @BeforeAll
-    public void init() {
+    void init() {
         repository.saveAll(mockBatteries);
     }
 
@@ -38,7 +38,7 @@ public class VppsRepositoryTests {
      * batteries returned should be within the given postcode range
      */
     @Test
-    public void shouldFetchOnlyBatteriesWithinRange() {
+    void shouldFetchOnlyBatteriesWithinRange() {
         String start = "1230";
         String end = "1280";
 

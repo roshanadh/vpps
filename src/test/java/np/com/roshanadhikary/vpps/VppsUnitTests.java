@@ -32,7 +32,7 @@ class VppsUnitTests {
 	);
 
 	@Test
-	public void shouldFetchAllBatteries() {
+	void shouldFetchAllBatteries() {
 		when(repository.findAll())
 				.thenReturn(mockBatteries);
 
@@ -42,7 +42,7 @@ class VppsUnitTests {
 	}
 
 	@Test
-	public void shouldFetchBatteriesWithinRange() {
+	void shouldFetchBatteriesWithinRange() {
 		String start = "1200";
 		String end = "1280";
 
@@ -73,7 +73,7 @@ class VppsUnitTests {
 	}
 
 	@Test
-	public void shouldThrowExceptionForNoBatteriesWithinRange() {
+	void shouldThrowExceptionForNoBatteriesWithinRange() {
 		String start = "0001";
 		String end = "0010";
 
@@ -85,7 +85,7 @@ class VppsUnitTests {
 	}
 
 	@Test
-	public void shouldPersistAllBatteries() {
+	void shouldPersistAllBatteries() {
 		when(repository.saveAll(mockBatteries)).thenReturn(mockBatteries);
 
 		Assertions.assertEquals(mockBatteries, service.saveAll(mockBatteries));
