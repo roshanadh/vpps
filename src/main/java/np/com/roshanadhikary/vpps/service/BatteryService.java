@@ -20,6 +20,11 @@ public class BatteryService {
         this.repository = repository;
     }
 
+    /**
+     * @param id
+     * @return a Battery resource, identified by an integer ID.
+     * HTTP response 404 is returned and an exception thrown if no such resource with ID found.
+     */
     public Battery findById(int id) {
         return repository
                 .findById(id)
@@ -30,12 +35,20 @@ public class BatteryService {
                         ));
     }
 
+    /**
+     * @return list of all Battery resources
+     */
     public List<Battery> findAll() {
         return StreamSupport
                 .stream(repository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * @param start
+     * @param end
+     * @return a list of Battery resources, each having a postcode value in the supplied range [start, end].
+     */
     public BatteryListEntity findAllBetweenPostcodeRange(String start, String end) {
         List<Battery> batteries;
 
@@ -48,7 +61,7 @@ public class BatteryService {
                     "Postcode range should be numeric");
         }
 
-
+        // throw with 416 Range Not Satisfiable response if no batteries in given range
         if (batteries.isEmpty())
             throw new ResponseStatusException(
                     HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE,
@@ -79,6 +92,11 @@ public class BatteryService {
         return responseEntity;
     }
 
+    /**
+     * Persist the supplied list of Battery resources
+     * @param batteries
+     * @return the list of persisted Battery resources
+     */
     public List<Battery> saveAll(List<Battery> batteries) {
         return StreamSupport
                 .stream(repository.saveAll(batteries).spliterator(), false)
