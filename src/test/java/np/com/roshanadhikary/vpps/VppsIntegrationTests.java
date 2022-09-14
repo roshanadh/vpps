@@ -149,4 +149,15 @@ class VppsIntegrationTests {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void shouldReturn416ForNoBatteriesInGivenRange() throws Exception {
+        String start = "0000";
+        String end = "0010";
+
+        mockMvc
+                .perform(get(String.format("/batteries/postcode?start=%s&end=%s", start, end)))
+                .andDo(print())
+                .andExpect(status().isRequestedRangeNotSatisfiable());
+    }
 }
