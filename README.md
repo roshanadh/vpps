@@ -22,8 +22,7 @@ git clone https://github.com/roshanadh/vpps.git
 ```
 2. Run the application
 ```sh
-cd vpps &&\
-./mvnw spring-boot:run
+cd vpps && .\mvnw spring-boot:run
 ```
 
 This sets up the project to run on port 8080.
