@@ -160,4 +160,13 @@ class VppsIntegrationTests {
                 .andDo(print())
                 .andExpect(status().isRequestedRangeNotSatisfiable());
     }
+
+    @Test
+    void shouldReturnBadRequestForNaNID() throws Exception {
+        String id = "abc";
+        mockMvc
+                .perform(get(String.format("/batteries/%s", id)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
 }
