@@ -25,7 +25,7 @@ git clone https://github.com/roshanadh/vpps.git
 cd vpps && .\mvnw spring-boot:run
 ```
 
-This sets up the project to run on port 8080.
+This sets up the project and runs the application on port 8080.
 
 ## API Reference
 
@@ -57,7 +57,7 @@ Upon successful fetching of the resource, the API returns a JSON response with t
 
 ```javascript
 {
-  "id" : string,
+  "id" : int,
   "name" : string,
   "postcode" : string,
   "capacity": int
@@ -68,9 +68,9 @@ The `id` attribute contains an integer ID auto-generated when a battery resource
 
 The `name` attribute contains the name of the battery resource.
 
-The `postcode` attribute contains the postcode information of a battery resource.
+The `postcode` attribute contains the postcode information of the battery resource.
 
-The `capacity` attribute contains the watt-capacity information of a battery resource.
+The `capacity` attribute contains the watt-capacity information of the battery resource.
 
 ### 3. Fetch all battery resources
 
@@ -99,9 +99,9 @@ The `id` attribute contains an integer ID auto-generated when a battery resource
 
 The `name` attribute contains the name of the battery resource.
 
-The `postcode` attribute contains the postcode information of a battery resource.
+The `postcode` attribute contains the postcode information of the battery resource.
 
-The `capacity` attribute contains the watt-capacity information of a battery resource.
+The `capacity` attribute contains the watt-capacity information of the battery resource.
 
 ### 4. Fetch all battery resources within a range of postcode
 
@@ -111,10 +111,10 @@ To get a list of the names of batteries having postcode within the range provide
 GET /batteries/postcode?start={}&end={}
 ```
 
-| Query Parameter | Type             | Description                    |
-|:----------------|:-----------------|:-------------------------------|
-| `start`         | `numeric string` | start of the range |
-| `end`           | `numeric string` | end of the range    |
+| Query Parameter | Type                    | Description                    |
+|:----------------|:------------------------|:-------------------------------|
+| `start`         | `integer` (e.g., 01002) | start of the range |
+| `end`           | `integer` (e.g., 01002) | end of the range    |
 
 Both, `start` and `end`, parameter values are included in the range.
 Both parameter values must be numeric string. If the provided range values cannot be parsed into an integer value, a `400 BAD REQUEST` response is returned.
@@ -179,9 +179,9 @@ The `id` attribute contains an integer ID auto-generated when a battery resource
 
 The `name` attribute contains the name of the battery resource.
 
-The `postcode` attribute contains the postcode information of a battery resource.
+The `postcode` attribute contains the postcode information of the battery resource.
 
-The `capacity` attribute contains the watt-capacity information of a battery resource.
+The `capacity` attribute contains the watt-capacity information of the battery resource.
 
 ## Status Codes
 
