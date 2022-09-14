@@ -188,10 +188,11 @@ The `capacity` attribute contains the watt-capacity information of a battery res
 
 The API can respond with the following status codes:
 
-| Status Code | Description             | Example Triggering Scenario                            |
-|:------------|:------------------------|:-------------------------------------------------------|
-| 200         | `OK`                    | `List of batteries fetched successfully`               |
-| 201         | `CREATED`               | `List of batteries persisted successfully`             |
-| 400         | `BAD REQUEST`           | `Invalid range of postcode given in request`           |
-| 404         | `NOT FOUND`             | `No battery within given range of postcode`            |
-| 500         | `INTERNAL SERVER ERROR` | `Error in API`                                         |
+| Status Code | Description             | Example Triggering Scenario                        |
+|:------------|:------------------------|:---------------------------------------------------|
+| 200         | `OK`                    | `List of batteries fetched successfully`           |
+| 201         | `CREATED`               | `List of batteries persisted successfully`         |
+| 400         | `BAD REQUEST`           | `Invalid range of postcode given in request`       |
+| 404         | `NOT FOUND`             | `No battery exists with given ID`                  |
+| 416         | `RANGE NOT SATISFIABLE` | `No battery exists within given range of postcode` |
+| 500         | `INTERNAL SERVER ERROR` | `Internal error in API`                            |
