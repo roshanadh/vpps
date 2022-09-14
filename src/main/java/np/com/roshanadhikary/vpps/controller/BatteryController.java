@@ -17,22 +17,22 @@ public class BatteryController {
         this.service = service;
     }
 
-    @GetMapping("/batteries/{id}")
+    @GetMapping("batteries/{id}")
     public Battery getBatteryFromId(@PathVariable int id) {
         return service.findById(id);
     }
 
-    @GetMapping("/batteries/")
+    @GetMapping("batteries")
     public List<Battery> getAllBatteries() {
         return service.findAll();
     }
 
-    @GetMapping("/batteries/postcode")
+    @GetMapping("batteries/postcode")
     public BatteryListEntity getBatteriesBetweenPostcodeRange(@RequestParam String start, @RequestParam String end) {
         return service.findAllBetweenPostcodeRange(start, end);
     }
 
-    @PostMapping("/batteries/")
+    @PostMapping("batteries")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Battery> saveBatteries(@RequestBody List<Battery> batteries) {
         return service.saveAll(batteries);

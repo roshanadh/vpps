@@ -144,7 +144,7 @@ To persist a list of the battery resources in the in-memory H2 database.
 
 #### Request
 ```http
-POST /batteries
+POST /batteries/
 ```
 
 The payload for this POST request is an array of JSON objects, each object being a battery resource to be persisted.
