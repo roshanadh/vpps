@@ -15,7 +15,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -128,6 +127,37 @@ class VppsIntegrationTests {
                 .andExpect(jsonPath("$", Matchers.hasSize(mockBatteries.size())));
     }
 
+    @Test
+    /**
+     * If a given battery ID already exists in the database, update the resource
+     */
+    void shouldUpdateBatteryForBatteryThatExists() throws Exception {
+        Battery battery = H2Bootstrap.mockBatteries.get(0);
+        int id = battery.getId();
+
+        // updated parameters
+        String updatedName = "Name changed for test";
+        String updatedPostcode = "010101";
+        int updatedCapacity = 10000;
+
+        battery.setName(updatedName);
+        battery.setPostcode(updatedPostcode);
+        battery.setCapacity(updatedCapacity);
+
+        mockMvc
+                .perform(
+                        put("/batteries")
+                                .content(objectMapper.writeValueAsString(battery))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.name").value(updatedName))
+                .andExpect(jsonPath("$.postcode").value(updatedPostcode))
+                .andExpect(jsonPath("$.capacity").value(updatedCapacity));
+    }
+
     // negative tests
 
     @Test
@@ -168,5 +198,30 @@ class VppsIntegrationTests {
                 .perform(get(String.format("/batteries/%s", id)))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void shouldReturn404ForPUTActionOnNonExistentBattery() throws Exception {
+        int id = Integer.MAX_VALUE;
+
+        Battery battery = new Battery();
+
+        // updated parameters
+        String updatedName = "Name changed for test";
+        String updatedPostcode = "010101";
+        int updatedCapacity = 10000;
+
+        battery.setName(updatedName);
+        battery.setPostcode(updatedPostcode);
+        battery.setCapacity(updatedCapacity);
+
+        mockMvc
+                .perform(
+                        put("/batteries")
+                                .content(objectMapper.writeValueAsString(battery))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 }

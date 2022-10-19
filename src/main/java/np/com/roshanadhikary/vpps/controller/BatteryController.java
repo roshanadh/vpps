@@ -37,4 +37,10 @@ public class BatteryController {
     public List<Battery> saveBatteries(@RequestBody List<Battery> batteries) {
         return service.saveAll(batteries);
     }
+
+    @PutMapping("batteries")
+    public Battery updateOrSaveBattery(@RequestBody Battery battery) {
+        return service
+                .updateBattery(battery);
+    }
 }

@@ -102,4 +102,23 @@ public class BatteryService {
                 .stream(repository.saveAll(batteries).spliterator(), false)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Updates the given battery resource
+     * @param battery
+     * @return the updated battery resource
+     */
+    public Battery updateBattery(Battery battery) {
+
+        repository
+                .findById(battery.getId())
+                .orElseThrow(
+                        () -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                String.format("Battery with ID %s does not exist", battery.getId())
+                        ));
+
+        return repository
+                .save(battery);
+    }
 }
