@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -120,5 +121,19 @@ public class BatteryService {
 
         return repository
                 .save(battery);
+    }
+
+    public Battery deleteBattery(int id) {
+        Optional<Battery> battery = repository
+                .findById(id);
+
+        battery.orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        String.format("Battery with ID %s does not exist", id)
+                ));
+
+        repository.deleteById(id);
+        return battery.get();
     }
 }
