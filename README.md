@@ -277,7 +277,7 @@ DELETE /batteries/{ID}
 
 #### Response
 
-Upon successful deletion of the resource, the API returns a JSON response with the following structure:
+Upon successful deletion of the resource, the API returns a JSON response containing the resource that was just deleted:
 
 ```javascript
 {
