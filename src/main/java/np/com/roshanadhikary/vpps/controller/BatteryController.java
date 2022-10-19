@@ -38,6 +38,12 @@ public class BatteryController {
         return service.saveAll(batteries);
     }
 
+    @PostMapping("batteries/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Battery saveBattery(@RequestBody Battery battery) {
+        return service.save(battery);
+    }
+
     @PutMapping("batteries")
     public Battery updateOrSaveBattery(@RequestBody Battery battery) {
         return service

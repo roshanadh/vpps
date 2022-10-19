@@ -90,4 +90,13 @@ class VppsUnitTests {
 
 		Assertions.assertEquals(mockBatteries, service.saveAll(mockBatteries));
 	}
+
+	@Test
+	void shouldPersistSingleBattery() {
+		Battery mockBattery = mockBatteries.get(0);
+
+		when(repository.save(mockBattery)).thenReturn(mockBattery);
+
+		Assertions.assertEquals(mockBattery, service.save(mockBattery));
+	}
 }

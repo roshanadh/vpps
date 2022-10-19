@@ -128,6 +128,25 @@ class VppsIntegrationTests {
     }
 
     @Test
+    void shouldPersistSingleBattery() throws Exception {
+        Battery mockBattery =
+                new Battery("Gold Coast Mc", "9729", 50000);
+
+
+        mockMvc
+                .perform(
+                        post("/batteries/new")
+                                .content(objectMapper.writeValueAsString(mockBattery))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name").value(mockBattery.getName()))
+                .andExpect(jsonPath("$.postcode").value(mockBattery.getPostcode()))
+                .andExpect(jsonPath("$.capacity").value(mockBattery.getCapacity()));
+    }
+
+    @Test
     /**
      * If a given battery ID already exists in the database, update the resource
      */
