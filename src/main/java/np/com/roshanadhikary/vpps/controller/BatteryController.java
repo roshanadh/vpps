@@ -43,4 +43,9 @@ public class BatteryController {
         return service
                 .updateBattery(battery);
     }
+
+    @DeleteMapping("batteries/{id}")
+    public Battery deleteBattery(@PathVariable int id) {
+        return service.deleteBattery(id);
+    }
 }
