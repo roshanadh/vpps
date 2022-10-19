@@ -202,8 +202,6 @@ class VppsIntegrationTests {
 
     @Test
     void shouldReturn404ForPUTActionOnNonExistentBattery() throws Exception {
-        int id = Integer.MAX_VALUE;
-
         Battery battery = new Battery();
 
         // updated parameters
@@ -221,6 +219,16 @@ class VppsIntegrationTests {
                                 .content(objectMapper.writeValueAsString(battery))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void shouldReturn404ForDELETEActionOnNonExistentBattery() throws Exception {
+        int id = Integer.MAX_VALUE;
+
+        mockMvc
+                .perform(delete("/batteries/" + id))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
