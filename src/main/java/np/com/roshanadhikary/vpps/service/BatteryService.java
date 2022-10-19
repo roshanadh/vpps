@@ -94,6 +94,16 @@ public class BatteryService {
     }
 
     /**
+     * Persist the supplied battery resource
+     * @param battery
+     * @return the battery resource that was persisted
+     */
+    public Battery save(Battery battery) {
+        return repository
+                .save(battery);
+    }
+
+    /**
      * Persist the supplied list of Battery resources
      * @param batteries
      * @return the list of persisted Battery resources

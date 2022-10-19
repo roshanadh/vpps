@@ -183,6 +183,119 @@ The `postcode` attribute contains the postcode information of the battery resour
 
 The `capacity` attribute contains the watt-capacity information of the battery resource.
 
+### 6. Persist a single battery resource
+
+To persist a single battery resource in the in-memory H2 database.
+
+#### Request
+```http
+POST /batteries/new
+```
+
+The payload for this POST request is a JSON object, representing the battery resource to be persisted.
+The payload has the following structure:
+```javascript
+{
+    "name" : string,
+    "postcode" : string,
+    "capacity" : int,
+}
+```
+
+#### Response
+
+Upon successful persisting of the resource, the API returns a JSON response similar to the payload, but with an `id` attribute included in the JSON object:
+
+```javascript
+{
+    "id" : int,
+    "name" : string,
+    "postcode" : string,
+    "capacity": int
+}
+```
+
+The `id` attribute contains an integer ID auto-generated when a battery resource is persisted in the database.
+
+The `name` attribute contains the name of the battery resource.
+
+The `postcode` attribute contains the postcode information of the battery resource.
+
+The `capacity` attribute contains the watt-capacity information of the battery resource.
+
+### 7. Update a battery resource
+
+To update a battery resource in the in-memory H2 database.
+
+#### Request
+```http
+PUT /batteries/
+```
+
+The payload for this POST request is a JSON object, with a mandatory `id` field. If the resource identified by `id` does not exist in the database, a 404 response is made.
+The payload has the following structure:
+```javascript
+{
+    "id" : int, 
+    "name" : String,
+    "postcode" : String,
+    "capacity" : int
+}
+```
+
+#### Response
+
+Upon successful update of the resource, the API returns a JSON response containing the resource that was updated (identical to the request payload):
+
+```javascript
+{
+    "id" : int,
+    "name" : string,
+    "postcode" : string,
+    "capacity": int
+}
+```
+
+The `id` attribute contains an integer ID auto-generated when a battery resource is persisted in the database.
+
+The `name` attribute contains the name of the battery resource.
+
+The `postcode` attribute contains the postcode information of the battery resource.
+
+The `capacity` attribute contains the watt-capacity information of the battery resource.
+
+### 8. Delete a battery resource
+
+#### Request
+```http
+DELETE /batteries/{ID}
+```
+
+| Path Variable | Type  | Description              |
+|:--------------|:------|:-------------------------|
+| `ID`          | `int` | ID of a battery resource |
+
+#### Response
+
+Upon successful deletion of the resource, the API returns a JSON response with the following structure:
+
+```javascript
+{
+  "id" : int,
+  "name" : string,
+  "postcode" : string,
+  "capacity": int
+}
+```
+
+The `id` attribute contains an integer ID auto-generated when a battery resource is persisted in the database.
+
+The `name` attribute contains the name of the battery resource.
+
+The `postcode` attribute contains the postcode information of the battery resource.
+
+The `capacity` attribute contains the watt-capacity information of the battery resource.
+
 ## Status Codes
 
 The API can respond with the following status codes:
